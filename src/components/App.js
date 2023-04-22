@@ -5,18 +5,37 @@ import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
 
 class App extends Component {
+  state = {
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
+  };
+  // this.handleFilter = this.handleFilter.bind(this);
 
-    state = {
-      contacts: [
-        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      ],
-      filter: '',
-    };
-    // this.handleFilter = this.handleFilter.bind(this);
-  
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps);
+
+    console.log(this.state);
+
+    if (this.state.contacts !== prevState.contacts) {
+      console.log('обновилось');
+
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  componentDidMount() {
+    console.log('didMount');
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    console.log(parsedContacts);
+    this.setState({ contacts: parsedContacts });
+  }
 
   addContact = data => {
     const newContact = Object.assign({}, data, { id: nanoid() });
@@ -39,11 +58,11 @@ class App extends Component {
     );
   };
 
-  deletContact = (contactId) => {
+  deletContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-    }))
-  }
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
 
   render() {
     const { filter } = this.state;
@@ -53,7 +72,11 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
         <h2 style={{ marginLeft: 20 }}>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilter} />
-        <Contacts contacts={this.filteredContacts()} filter={filter} ondeletContact={this.deletContact}/>
+        <Contacts
+          contacts={this.filteredContacts}
+          filter={filter}
+          ondeletContact={this.deletContact}
+        />
       </div>
     );
   }
