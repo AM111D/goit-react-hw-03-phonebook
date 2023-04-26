@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import css from './Filter.module.css';
+import css from './filter.module.css';
 
 const Filter = props => {
   return (

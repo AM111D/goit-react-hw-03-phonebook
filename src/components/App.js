@@ -79,6 +79,5 @@ export class App extends Component {
     );
   }
 }
-console.log();
 
 export default App;
