@@ -1,11 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import css from './Filter.module.css';
 
 const Filter = props => {
   return (
-    <div>
+    <div className={css.filter}>
       <h3>Find contacts by name:</h3>
       <input
+        className={css.filterInput}
         id="filter"
         value={props.filter}
         onChange={props.change}
