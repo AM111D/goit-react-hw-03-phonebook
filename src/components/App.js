@@ -14,6 +14,7 @@ export class App extends Component {
     let contactId = nanoid();
     let contacts = [...this.state.contacts];
     const names = contacts.map(contact => contact.name);
+    console.log(names);
 
     if (!names.find(el => el === name)) {
       contacts = [...contacts, { id: contactId, name: name, number: number }];
