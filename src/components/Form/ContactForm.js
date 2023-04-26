@@ -13,9 +13,11 @@ class ContactForm extends Component {
   nameInputId = nanoid();
   numberInputId = nanoid();
 
+  
+
   collectionInfo = event => {
     const { name, value } = event.currentTarget;
-
+    
     // if (this.state.name || this.state.number) {
     //   console.log('kyky');
     // }
@@ -38,7 +40,7 @@ class ContactForm extends Component {
   render() {
     return (
       <div className={css.form}>
-        <form onSubmit={this.submitForm}>
+        <form  onSubmit={this.submitForm}>
           {/* <label htmlFor={this.nameInputId}> */}
           <span className={css.formName}>Name</span>
           <input

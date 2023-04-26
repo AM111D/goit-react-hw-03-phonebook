@@ -16,25 +16,18 @@ class App extends Component {
   };
   // this.handleFilter = this.handleFilter.bind(this);
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps);
-
-    console.log(this.state);
-
-    if (this.state.contacts !== prevState.contacts) {
-      console.log('обновилось');
-
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
+  componentDidMount() {
+    const contact = localStorage.getItem('contacts');
+    const parsedContact = JSON.parse(contact);
+    this.setState({
+      contacts: parsedContact,
+    });
   }
 
-  componentDidMount() {
-    console.log('didMount');
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-
-    console.log(parsedContacts);
-    this.setState({ contacts: parsedContacts });
+  componentDidUpdate(prevState, prevProps) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
   }
 
   addContact = data => {
@@ -73,7 +66,7 @@ class App extends Component {
         <h2 style={{ marginLeft: 20 }}>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilter} />
         <Contacts
-          contacts={this.filteredContacts}
+          contacts={this.filteredContacts()}
           filter={filter}
           ondeletContact={this.deletContact}
         />
