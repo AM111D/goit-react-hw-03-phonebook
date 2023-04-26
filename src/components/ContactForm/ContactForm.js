@@ -23,9 +23,7 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <form className={css.contactForm} onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
-          Name
-        </label>
+        <label htmlFor="name">Name</label>
         <input
           className={css.contactInput}
           id="name"
@@ -37,9 +35,7 @@ class ContactForm extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label htmlFor="number">
-          Number
-        </label>
+        <label htmlFor="number">Number</label>
         <input
           className={css.contactInput}
           id="number"

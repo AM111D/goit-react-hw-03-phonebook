@@ -10,7 +10,8 @@ const ContactListElement = props => {
       <button
         className={css.button}
         type="button"
-        onClick={props.deleteContact}>
+        onClick={props.deleteContact}
+      >
         Delete
       </button>
     </li>
